@@ -1,5 +1,6 @@
 import axios from "axios";
-import '../.env';
+import dotenv from "dotenv";
+dotenv.config();
 
 
 const instance = axios.create({
