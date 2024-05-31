@@ -6,11 +6,11 @@ const port = 5000;
 app.use('/project', express.static(path.join(__dirname, "/../frontend/build")));
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}/project`);
+    console.log(`the server is running at http://localhost:${port}/project`);
 });
 
 app.get('/project',  (req, res)=> {
-    res.send("tml");
+    res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
 });
 
 
