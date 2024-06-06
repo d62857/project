@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -11,7 +13,7 @@ app.use("/project", express.static(path.join(__dirname, "/../frontend/build")));
 
 app.listen(port, () => {
   mongoose
-    .connect(MONGO_URL)
+    .connect(process.env.DATABASE_URL)
     .then(() => {
       console.log(`it's running at http://localhost:${port}/project`);
       console.log("DB connected");
