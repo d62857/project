@@ -40,3 +40,54 @@
     padding: 5px;
     border: none;
 }
+
+.nav__genre {
+    position: fixed;
+    right: 30%;
+    width: 130px;
+    color: LightBlue;
+    background-color: rgba(0, 0, 0, 0.182);
+    border-radius: 5px;
+    padding: 5px;
+    border: gray-400;
+    font-size: 17px;
+    font-weight: 900;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+}
+
+.nav__my {
+    position: fixed;
+    right: 20%;
+    width: 130px;
+    color: LightBlue;
+    padding: 5px;
+    border: gray-400;
+    font-size: 17px;
+    font-weight: 900;
+    background-color: rgba(0, 0, 0, 0.182);
+    border-radius: 5px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+}
+
+.nav__menu {
+    position: fixed;
+    right: 30%;
+    top: 65px;
+    width: 120px;
+    color: black;
+    padding: 5px;
+    border: gray-400;
+    font-size: 13px;
+    font-weight: 700;
+    line-height : 200%;
+    background-color: rgba(0, 0, 0, 0.182);
+    border-radius: 5px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+}
+
+.nav__menu:hover {
+    background-color: rgba(232, 238, 255, 0.782);
+}

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Nav.css";
 import { useNavigate } from "react-router-dom";
+import useOnclickOutside from "./../hooks/useOnclickOutside";
 
 export default function Nav() {
   const [show, setShow] = useState(false);
@@ -21,10 +22,49 @@ export default function Nav() {
     };
   }, []);
 
+  const Menus = [
+    "SF",
+    "Family",
+    "Horror",
+    "Documentary",
+    "Drama",
+    "Romance",
+    "Adventure",
+    "Mystery",
+    "Crime",
+    "Western",
+    "Thriller",
+    "Animation",
+    "Action",
+    "History",
+    "Music",
+    "War",
+    "Comedy",
+    "Fantasy",
+  ];
+
+  const [open, setOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  const handleClick = () => {
+    if (isLoggedIn) {
+      navigate("/mypage");
+    } else {
+      alert("로그인이 필요한 서비스입니다");
+    }
+  };
+
   const handleChange = (e) => {
     setSearchValue(e.target.value);
     navigate(`/search?q=${e.target.value}`);
   };
+
+  const menuRef = useRef();
+  const btnRef = useRef();
+
+  useOnclickOutside(menuRef, () => {
+    setOpen(false);
+  });
 
   return (
     <nav className={`nav ${show && "nav__black"}`}>
@@ -32,7 +72,7 @@ export default function Nav() {
         alt="Netflix logo"
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/220px-Netflix_2015_logo.svg.png"
         className="nav__logo"
-        onClick={() => window.location.reload()}
+        onClick={() => navigate("/")}
       />
       <input
         value={searchValue}
@@ -41,7 +81,35 @@ export default function Nav() {
         type="text"
         placeholder="영화를 검색하세요"
       />
-
+      <div className="h-screen bg-gray-200 felx justify-center">
+        <div className="relative">
+          <button
+            ref={btnRef}
+            onClick={() => setOpen(!open)}
+            className="nav__genre"
+          >
+            장르별 찾기
+            {open && (
+              <div ref={menuRef} className="nav__menu">
+                <ul>
+                  {Menus.map((menu) => (
+                    <li
+                      onClick={() => setOpen(false)}
+                      className="p-2 text-lg cursor-pointer rounded hover:bg-blue-100"
+                      key={menu}
+                    >
+                      {menu}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </button>
+        </div>
+      </div>
+      <button className="nav__my" onClick={() => handleClick()}>
+        나의 영화
+      </button>
       <img
         alt="User logged"
         src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"

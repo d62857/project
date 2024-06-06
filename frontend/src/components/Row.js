@@ -20,7 +20,6 @@ export default function Row({ isLargeRow, title, id, fetchUrl }) {
 
   const fetchMovieData = async () => {
     const request = await axios.get(fetchUrl);
-    console.log("requestasdf", request);
     setMovies(request.data.results);
   };
 
@@ -35,30 +34,27 @@ export default function Row({ isLargeRow, title, id, fetchUrl }) {
       <Swiper
         // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y]}
-        
-        
         navigation
         pagination={{ clickable: true }}
         loop={true}
         breakpoints={{
-            1378: {
-                slidesPerView: 6,
-                slidesPerGroup: 6,
-            },
-            998: {
-                slidesPerView: 5,
-                slidesPerGroup: 5,
-            },
-            625: {
-                slidesPerView: 4,
-                slidesPerGroup: 4,
-            },
-            0: {
-                slidesPerView: 3,
-                slidesPerGroup: 3,
-            }
+          1378: {
+            slidesPerView: 6,
+            slidesPerGroup: 6,
+          },
+          998: {
+            slidesPerView: 5,
+            slidesPerGroup: 5,
+          },
+          625: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+          },
+          0: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+          },
         }}
-        
       >
         <div id={id} className="row__posters">
           {movies.map((movie) => (
