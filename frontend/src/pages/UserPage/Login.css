@@ -34,7 +34,6 @@
   background-color: rgb(233, 233, 233, 0.6);
   margin-bottom: 4px;
   cursor: pointer;
-  placeholder: "이메일을 입력하세요";
 }
 
 .input_password {
@@ -47,7 +46,6 @@
   background-color: rgb(233, 233, 233, 0.6);
   margin-bottom: 10px;
   cursor: pointer;
-  placeholder: "패스워드를 입력하세요";
 }
 
 .login_btn {

@@ -41,10 +41,10 @@ function Register() {
       .then((response) => {
         setFlag(false);
         if (response.data.success) {
-          navigate("/login");
-          alert("회원가입이 완료되었습니다. 로그인하시기 바랍니다.");
+          navigate("/");
+          alert("회원가입이 완료되었습니다");
         } else {
-          alert("이미 가입된 이메일입니다.");
+          alert("이미 가입된 이메일입니다");
         }
       })
       .catch((error) => {
@@ -59,30 +59,30 @@ function Register() {
           className="input_name"
           type="name"
           value={name}
+          placeholder="닉네임을 입력하세요"
           onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="이름을 입력하세요"
         />
         <input
           className="input_email"
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.currentTarget.value)}
           placeholder="이메일을 입력하세요"
+          onChange={(e) => setEmail(e.currentTarget.value)}
         />
         <input
           className="input_password"
           type="password"
           value={password}
-          onChange={(e) => setPassword(e.currentTarget.value)}
           placeholder="패스워드를 입력하세요"
+          onChange={(e) => setPassword(e.currentTarget.value)}
         />
         <div className="guide_text">패스워드를 한번 더 입력하세요</div>
         <input
           className="input_password"
           type="password"
           value={confirmPW}
-          onChange={(e) => setConfirmPW(e.currentTarget.value)}
           placeholder="패스워드를 입력하세요"
+          onChange={(e) => setConfirmPW(e.currentTarget.value)}
         />
         <button
           disabled={flag}

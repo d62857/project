@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Nav.css";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import useOnclickOutside from "./../hooks/useOnclickOutside";
+import firebase from "../firebase";
 
 export default function Nav() {
+  const user = useSelector((state) => state.user);
   const [show, setShow] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -46,7 +48,7 @@ export default function Nav() {
   ];
 
   const handleMyMovie = () => {
-    if (isLoggedIn) {
+    if (user.accessToken) {
       setOpen(false);
       navigate("/mypage");
     } else {
@@ -58,6 +60,17 @@ export default function Nav() {
     setSearchValue(e.target.value);
     setOpen(false);
     navigate(`/search?q=${e.target.value}`);
+  };
+
+  const handleLog = (e) => {
+    e.preventDefault();
+    if (user.accessToken) {
+      firebase.auth().signOut();
+      alert("로그아웃되었습니다. 알림창을 닫으면 홈으로 이동합니다.");
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
   };
 
   const menuRef = useRef();
@@ -123,11 +136,10 @@ export default function Nav() {
       <button
         className="nav__log"
         onClick={(e) => {
-          e.preventDefault();
-          navigate("/login");
+          handleLog(e);
         }}
       >
-        {isLoggedIn ? "로그아웃" : "로그인"}
+        {user.accessToken ? "로그아웃" : "로그인"}
       </button>
       <button
         className="nav__regi"
