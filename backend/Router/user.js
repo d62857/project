@@ -3,7 +3,9 @@ const router = express.Router();
 const { User } = require("../Model/User.js");
 
 router.post("/register", (req, res) => {
+  console.log("user.js line6 실행중");
   console.log(req.body);
+
   const userData = new User(req.body);
   userData
     .save()

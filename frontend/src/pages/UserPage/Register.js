@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Register.css";
 import firebase from "../../firebase";
-import axios from "../../api/axios";
+import axios from "axios";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -11,7 +11,7 @@ function Register() {
   const [confirmPW, setConfirmPW] = useState("");
   const [flag, setFlag] = useState(false);
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const RegisterFunc = async (e) => {
     setFlag(true);
@@ -25,28 +25,31 @@ function Register() {
     if (password !== confirmPW) {
       return alert("입력하신 두 비밀번호가 일치하지 않습니다");
     }
-    let createdUser = await firebase
+    const createdUser = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password);
     await createdUser.user.updateProfile({
       displayName: name,
     });
-    let body = {
+    const body = {
       email: createdUser.user.multiFactor.user.email,
       displayName: createdUser.user.multiFactor.user.displayName,
       uid: createdUser.user.multiFactor.user.uid,
     };
-    console.log("1");
-    axios.post("/api/user/register", body).then((response) => {
-      setFlag(false);
-      if (response.data.success) {
-        navigate("/login");
-        alert("회원가입이 완료되었습니다. 로그인하시기 바랍니다.");
-      } else {
-        alert("이미 가입된 이메일입니다.");
-      }
-    });
-    console.log("2");
+    axios
+      .post("/project/api/user/register", body)
+      .then((response) => {
+        setFlag(false);
+        if (response.data.success) {
+          navigate("/login");
+          alert("회원가입이 완료되었습니다. 로그인하시기 바랍니다.");
+        } else {
+          alert("이미 가입된 이메일입니다.");
+        }
+      })
+      .catch((error) => {
+        console.error("회원가입중 오류가 발생했습니다:", error);
+      });
   };
 
   return (

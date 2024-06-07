@@ -11,7 +11,7 @@ app.use("/project", express.static(path.join(__dirname, "/../frontend/build")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/user", require("./Router/user.js"));
+app.use("/project/api/user", require("./Router/user.js"));
 
 app.listen(port, () => {
   mongoose
@@ -25,10 +25,10 @@ app.listen(port, () => {
     });
 });
 
-app.get("/", (req, res) => {
+app.get("/project", (req, res) => {
   res.sendFile(path.join(__dirname, "/../frontend/build/index.html"));
 });
 
-app.get("*", (req, res) => {
+app.get("/project/*", (req, res) => {
   res.sendFile(path.join(__dirname, "/../frontend/build/index.html"));
 });
