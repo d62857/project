@@ -6,6 +6,8 @@ import useOnclickOutside from "./../hooks/useOnclickOutside";
 export default function Nav() {
   const [show, setShow] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,11 +45,10 @@ export default function Nav() {
     "Fantasy",
   ];
 
-  const [open, setOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-
-  const handleClick = () => {
+  const handleClick = (e) => {
     if (isLoggedIn) {
+      e.preventDefault();
+      setOpen(false);
       navigate("/mypage");
     } else {
       alert("로그인이 필요한 서비스입니다");
@@ -56,6 +57,7 @@ export default function Nav() {
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
+    setOpen(false);
     navigate(`/search?q=${e.target.value}`);
   };
 
@@ -72,7 +74,10 @@ export default function Nav() {
         alt="Netflix logo"
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/220px-Netflix_2015_logo.svg.png"
         className="nav__logo"
-        onClick={() => navigate("/")}
+        onClick={(e) => {
+          e.preventDefault();
+          navigate("/");
+        }}
       />
       <input
         value={searchValue}
@@ -107,14 +112,33 @@ export default function Nav() {
           </button>
         </div>
       </div>
-      <button className="nav__my" onClick={() => handleClick()}>
+      <button
+        className="nav__my"
+        onClick={(e) => {
+          e.preventDefault();
+          navigate("/mypage");
+        }}
+      >
         나의 영화
       </button>
-      <img
-        alt="User logged"
-        src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
-        className="nav__avatar"
-      />
+      <button
+        className="nav__log"
+        onClick={(e) => {
+          e.preventDefault();
+          navigate("/login");
+        }}
+      >
+        {isLoggedIn ? "로그아웃" : "로그인"}
+      </button>
+      <button
+        className="nav__regi"
+        onClick={(e) => {
+          e.preventDefault();
+          navigate("/register");
+        }}
+      >
+        회원가입
+      </button>
     </nav>
   );
 }

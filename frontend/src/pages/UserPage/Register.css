@@ -1,0 +1,120 @@
+.wrapper {
+  display: grid;
+  flex-wrap: wrap;
+  place-items: center;
+  background: white;
+  height: 100dvh;
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+
+.content {
+  display: grid;
+  place-items: center;
+  background: white;
+  border: 2px solid;
+  border-color: green;
+  border-radius: 10px;
+  padding-top: 3rem;
+  padding-bottom: 30rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  height: 20rem;
+  box-shadow: 2px 2px 4px 2px #555555;
+}
+
+.input_name {
+  width: 500px;
+  height: 50px;
+  font-size: 18px;
+  border: 2px solid;
+  border-color: green;
+  border-radius: 5px;
+  background-color: rgb(233, 233, 233, 0.6);
+  margin-bottom: 4px;
+  cursor: pointer;
+  placeholder: "이름을 입력하세요";
+}
+
+.input_email {
+  width: 500px;
+  height: 50px;
+  font-size: 18px;
+  border: 2px solid;
+  border-color: green;
+  border-radius: 5px;
+  background-color: rgb(233, 233, 233, 0.6);
+  margin-bottom: 4px;
+  cursor: pointer;
+  placeholder: "이메일을 입력하세요";
+}
+
+.input_password {
+  width: 500px;
+  height: 50px;
+  font-size: 18px;
+  border: 2px solid;
+  border-color: green;
+  border-radius: 5px;
+  background-color: rgb(233, 233, 233, 0.6);
+  margin-bottom: 10px;
+  cursor: pointer;
+  placeholder: "패스워드를 입력하세요";
+}
+
+.guide_text {
+  display: block;
+  position: relative;
+  float: left;
+  padding: 0;
+  margin-top: 30px;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 50px;
+  color: Green;
+  border: 0;
+  border-radius: 15px;
+  transition: all 0.2s;
+  background-color: white;
+}
+
+.login_btn {
+  display: block;
+  position: relative;
+  float: left;
+  width: 120px;
+  padding: 0;
+  margin: 10px 20px 10px 0;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 50px;
+  color: black;
+  border: 0;
+  border-radius: 15px;
+  transition: all 0.2s;
+  margin-left: 6rem;
+  margin-right: 5rem;
+  background-color: LightGreen;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.login_btn:hover {
+  opacity: 1;
+}
+
+.input_name:hover {
+  box-shadow: 1px 1px 3px 1px #555555;
+}
+
+.input_email:hover {
+  box-shadow: 1px 1px 3px 1px #555555;
+}
+
+.input_password:hover {
+  box-shadow: 1px 1px 3px 1px #555555;
+}
