@@ -45,9 +45,8 @@ export default function Nav() {
     "Fantasy",
   ];
 
-  const handleClick = (e) => {
+  const handleMyMovie = () => {
     if (isLoggedIn) {
-      e.preventDefault();
       setOpen(false);
       navigate("/mypage");
     } else {
@@ -116,7 +115,7 @@ export default function Nav() {
         className="nav__my"
         onClick={(e) => {
           e.preventDefault();
-          navigate("/mypage");
+          handleMyMovie();
         }}
       >
         나의 영화

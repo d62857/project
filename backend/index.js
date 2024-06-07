@@ -3,13 +3,15 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-const { Post } = require("./Model/Post.js");
 
 const app = express();
 const port = 5000;
-const MONGO_URL = process.env.DATABASE_URL;
 
 app.use("/project", express.static(path.join(__dirname, "/../frontend/build")));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/user", require("./Router/user.js"));
 
 app.listen(port, () => {
   mongoose
@@ -23,7 +25,7 @@ app.listen(port, () => {
     });
 });
 
-app.get("/api/project", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/../frontend/build/index.html"));
 });
 
