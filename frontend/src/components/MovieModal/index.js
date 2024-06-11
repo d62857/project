@@ -1,8 +1,11 @@
-import React, {useRef} from "react";
+import React, { useState, useRef } from "react";
 import "./MovieModal.css";
-import useOnclickOutside from './../../hooks/useOnclickOutside';
+import Rating from "../Rating";
+import { useSelector } from "react-redux";
+import useOnclickOutside from "./../../hooks/useOnclickOutside";
 
 function MovieModal({
+  id,
   backdrop_path,
   title,
   overview,
@@ -13,7 +16,10 @@ function MovieModal({
   setModalOpen,
 }) {
   const ref = useRef();
-  useOnclickOutside(ref, () => {setModalOpen(false)});
+
+  useOnclickOutside(ref, () => {
+    setModalOpen(false);
+  });
 
   return (
     <div className="presentation">
@@ -30,12 +36,15 @@ function MovieModal({
           />
           <div className="modal__content">
             <p className="modal__details">
-              <span className="modal__user_perc">100% for you </span>
               {release_date ? release_date : first_air_date}
             </p>
             <h2 className="modal__title">{title ? title : name}</h2>
             <p className="modal__overview">평점: {vote_average}</p>
             <p className="modal__overview">{overview}</p>
+            <p className="modal__ratingIs">이 영화를 본 나의 평점은..</p>
+            <div className="modal__rating">
+              <Rating id={id} />
+            </div>
           </div>
         </div>
       </div>

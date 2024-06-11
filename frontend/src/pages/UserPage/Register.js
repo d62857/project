@@ -60,21 +60,21 @@ function Register() {
           type="name"
           value={name}
           placeholder="닉네임을 입력하세요"
-          onChange={(e) => setName(e.currentTarget.value)}
+          onChange={(e) => setName(e.target.value)}
         />
         <input
           className="input_email"
           type="email"
           value={email}
           placeholder="이메일을 입력하세요"
-          onChange={(e) => setEmail(e.currentTarget.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           className="input_password"
           type="password"
           value={password}
           placeholder="패스워드를 입력하세요"
-          onChange={(e) => setPassword(e.currentTarget.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <div className="guide_text">패스워드를 한번 더 입력하세요</div>
         <input
@@ -82,7 +82,7 @@ function Register() {
           type="password"
           value={confirmPW}
           placeholder="패스워드를 입력하세요"
-          onChange={(e) => setConfirmPW(e.currentTarget.value)}
+          onChange={(e) => setConfirmPW(e.target.value)}
         />
         <button
           disabled={flag}

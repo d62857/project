@@ -1,11 +1,12 @@
 import React from "react";
-import Row from "./../../components/Row";
-import requests from "./../../api/requests";
+import "./MyPage.css";
 
 function MyPage() {
   return (
-    <div>
-      <Row title="Top Rated" id="TR" fetchUrl={requests.fetchTopRated} />
+    <div className="wrapper">
+      <div className="content">
+        <div className="head_text">내가 평가한 영화</div>
+      </div>
     </div>
   );
 }

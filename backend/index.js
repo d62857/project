@@ -12,6 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/project/api/user", require("./Router/user.js"));
+app.use("/project/api/rating", require("./Router/rating.js"));
 
 app.listen(port, () => {
   mongoose

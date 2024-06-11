@@ -1,0 +1,26 @@
+.wrapper {
+  display: grid;
+  flex-wrap: wrap;
+  place-items: center;
+  background: white;
+  height: 100vh;
+  padding-top: 10rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+
+.content {
+  display: grid;
+  place-items: center;
+  background: white;
+  border: 2px solid;
+  border-color: green;
+  border-radius: 10px;
+  padding-top: 3rem;
+  padding-bottom: 30rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  height: 20rem;
+  width: 70dvh;
+  box-shadow: 2px 2px 4px 2px #555555;
+}

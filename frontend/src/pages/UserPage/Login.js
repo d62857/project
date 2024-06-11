@@ -38,14 +38,14 @@ function Login() {
           type="email"
           value={email}
           placeholder="이메일을 입력하세요"
-          onChange={(e) => setEmail(e.target.currentTarget.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           className="input_password"
           type="password"
           value={password}
           placeholder="패스워드를 입력하세요"
-          onChange={(e) => setPassword(e.target.currentTarget.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
         {errCode.length > 0 ? <p>{errCode}</p> : null}
         <button onClick={(e) => SignInFunc(e)} className="login_btn">
