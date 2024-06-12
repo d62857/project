@@ -5,22 +5,18 @@ import { useSelector } from "react-redux";
 
 function Rating({ id }) {
   const user = useSelector((state) => state.user);
-  const [ratingValue, setRatingValue] = useState(0);
 
   const [flag, setFlag] = useState(false);
   const menu = ["1점", "2점", "3점", "4점", "5점"];
 
-  const body = {
-    uid: user.uid,
-    tmdbId: id,
-    rating: ratingValue,
-  };
-
-  const handleRating = () => {
-    console.log("실행");
+  const handleRating = (x) => {
     if (user.accessToken && !flag) {
       setFlag(true);
-      console.log(typeof user.uid);
+      const body = {
+        uid: user.uid,
+        tmdbId: id,
+        rating: x,
+      };
       axios
         .post("/project/api/rating/update", body)
         .then((response) => {
@@ -40,9 +36,9 @@ function Rating({ id }) {
         <button
           className="rating__btn"
           key={menu}
-          onClick={() => {
-            setRatingValue(index + 1);
-            handleRating();
+          onClick={(e) => {
+            e.preventDefault();
+            handleRating(index + 1);
           }}
         >
           {menu}

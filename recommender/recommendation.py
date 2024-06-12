@@ -1,12 +1,15 @@
+import sys
 import pandas as pd
 import numpy as np
 import joblib
+import json
 from implicit.als import AlternatingLeastSquares
 from scipy.sparse import csr_matrix, vstack
 
-links_df = pd.read_csv("data/links.csv")
-movies_df = pd.read_csv("data/movies.csv")
-ratings_df = pd.read_csv("data/ratings.csv")
+movies_df = pd.read_csv("./data/movies.csv")
+ratings_df = pd.read_csv("./data/ratings.csv")
+links_df = pd.read_csv("./data/links.csv")
+
 
 user_list = ratings_df["userId"].unique()
 user_dic = {userId: index for index, userId in enumerate(user_list)}
@@ -32,7 +35,7 @@ def recommendByItem(tmdbId, N=21):
             calculated = trained_model.similar_items(movie_idx, N=21)
             
             calculated = calculated[0]
-            print(calculated)
+            
             for similar_items_idx in (calculated):
                 
                 calculated_movieId = movie_list[similar_items_idx]
@@ -42,17 +45,18 @@ def recommendByItem(tmdbId, N=21):
                     
                     result.append(int(tmdbId))
                 else:
-                    print("추천된 영화의 tmdb link 없음")      # 추천된 영화중 tmdb 링크가 없는경우
+                    continue                  # print("추천된 영화의 tmdb link 없음")      # 추천된 영화중 tmdb 링크가 없는경우
         else:
-            print("학습모델에서 평가된적 없음")
+            return              #  print("학습모델에서 평가된적 없음")
     else:
-        print("검색한 영화의 tmdb 링크 없음")
+        return                #  print("검색한 영화의 tmdb 링크 없음")
+    result2 = []
     print(result)
-    return result
+    result2 = result
+    return(result2)
         
 # user-based 추천, 추천 대상자인 user의 ID와 {tmdbId:rating}을 파라미터로 받음. recommend를 통해 계산
 def recommendByUser(new_user_ratings, N=21):
-   
     new_user_row = np.zeros(movieNum)
     counter = 0
     for tmdbId, rating in new_user_ratings.items():
@@ -64,12 +68,12 @@ def recommendByUser(new_user_ratings, N=21):
                 movieIdx = movie_dic[movieId]
                 new_user_row[movieIdx] = rating
             else:
-                print(f"데이터에 없는 영화 movieId : {movieId}")
+                continue       # print(f"데이터에 없는 영화 movieId : {movieId}")
         else:
-            print("데이터에 없음")        
+            continue   #print("link 데이터에 없음")        
     if counter == 0:
-        print("모든 영화가 데이터에 없음")
-        return result      
+        return    # print("모든 영화가 데이터에 없음")
+              
        
     
     new_user_row_csr = csr_matrix(new_user_row)
@@ -84,12 +88,23 @@ def recommendByUser(new_user_ratings, N=21):
         if len(tmdbId) != 0:
             tmdbId = tmdbId.iloc[0]
             result.append(int(tmdbId))
-            print(tmdbId)
-    print(result)        
-    return result
+            
+    result2 = result
+    return(result2)
+    
+    
 
-
-
+if __name__ == "__main__":
+    try:
+        if len(sys.argv) != 2:
+            raise ValueError("Usage: recommendation.py <user_ratings_json>")
+        
+        input_data = json.loads(sys.argv[1])
+        recommendations = recommendByUser(input_data)
+        print(json.dumps(recommendations))
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
 
 
 

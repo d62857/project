@@ -1,7 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import "./MovieModal.css";
 import Rating from "../Rating";
-import { useSelector } from "react-redux";
 import useOnclickOutside from "./../../hooks/useOnclickOutside";
 
 function MovieModal({

@@ -5,7 +5,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use("/project", express.static(path.join(__dirname, "/../frontend/build")));
 app.use(express.json());
@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/project/api/user", require("./Router/user.js"));
 app.use("/project/api/rating", require("./Router/rating.js"));
+app.use("/project/api/recommendation", require("./Router/recommendation.js"));
 
 app.listen(port, () => {
   mongoose
